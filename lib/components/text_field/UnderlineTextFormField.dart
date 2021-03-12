@@ -30,18 +30,18 @@ class UnderlineTextFormField extends StatefulWidget {
 }
 
 class _UnderlineTextFormFieldState extends State<UnderlineTextFormField> {
-  final fieldText = TextEditingController();
+  TextEditingController controller;
   UnderlineInputBorder border;
 
   @override
   void initState() {
     super.initState();
 
-    // if (widget.controller == null) {
-    //   controller = TextEditingController();
-    // }else{
-    //   controller = widget.controller;
-    // }
+    if (widget.controller == null) {
+      controller = TextEditingController();
+    }else{
+      controller = widget.controller;
+    }
   }
 
   renderLabel() {
@@ -61,7 +61,7 @@ class _UnderlineTextFormFieldState extends State<UnderlineTextFormField> {
   renderSuffixIcon(){
     return GestureDetector(
       onTap: (){
-        fieldText.clear();
+        controller.clear();
       },
       child: Container(
         width: 16.0,
@@ -91,7 +91,7 @@ class _UnderlineTextFormFieldState extends State<UnderlineTextFormField> {
 
     return TextFormField(
       style: TextStyle(color: Colors.white),
-      controller: fieldText,
+      controller: controller,
       validator: widget.validator,
       onSaved: widget.onSaved,
       obscureText: widget.obscureText,

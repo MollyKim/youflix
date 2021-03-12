@@ -3,12 +3,10 @@ import 'package:youflix/utils/validators.dart';
 import 'package:youflix/components/exports_text_field.dart';
 
 class EmailTextField extends StatefulWidget {
-  final bool suffixDomain;
   final ValueSetter<String> onSaved;
   final bool isBlack;
 
   const EmailTextField({
-    this.suffixDomain = false,
     @required this.onSaved,
     this.isBlack = true,
   });
@@ -19,10 +17,6 @@ class EmailTextField extends StatefulWidget {
 }
 
 class _EmailTextFieldState extends State<EmailTextField> {
-  @override
-  Widget build(BuildContext context) {
-      return renderBaseTextFormField();
-  }
 
   renderBaseTextFormField() {
     return UnderlineTextFormField(
@@ -36,6 +30,11 @@ class _EmailTextFieldState extends State<EmailTextField> {
       //   Get.toNamed('/auth/register/email');
       // },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return renderBaseTextFormField();
   }
 
 }

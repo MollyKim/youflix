@@ -11,14 +11,12 @@ class AuthController extends BaseController {
   AuthController({
     @required RootService rootService
   }) : super(rootService);
-
   loginUser({
     @required String email,
     @required String password,
 }) async {
     assert(email != null);
     assert(password != null);
-
     final resp = await super.services.authService.postToken(
         PostOAuthTokenBody: PostOAuthTokenBody(
           username: email,
@@ -29,7 +27,6 @@ class AuthController extends BaseController {
     this.storageUtils.writeByKey(key: 'accessToken', value: resp.accessTocken);
     //나중에 추가
     //this.storageUtils.writeByKey(key: 'refreshToken', value: resp.refreshToken);
-
     return resp;
   }
 }

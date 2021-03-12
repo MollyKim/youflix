@@ -8,8 +8,8 @@ import 'package:youflix/components/exports_text_field.dart';
 import 'package:youflix/layouts/exports_layouts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
-import 'package:youflix/models/user_model.dart';
 import 'package:get/get.dart';
+
 
 /*
  * 작성일 : 2021-03-09
@@ -26,6 +26,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final formModel = LoginFormModel();
   bool isFormLoading = false;
+  //GlobalKey<ScaffoldState> formKey = new GlobalKey();
   final formKey = GlobalKey<FormState>();
 
   renderLogo() {
@@ -46,7 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
         SizedBox(height: 20,),
         PasswordTextField(
           isBalck: true,
-          onSaved: formModel.password,
+          onSaved: formModel.setPassword,
         )
       ],
     );
@@ -56,33 +57,45 @@ class _AuthScreenState extends State<AuthScreen> {
     return Row(
       children: [
         Expanded(
-          child: InkWell(
-            onTap: this.isFormLoading ? null : () async{
-              if(this.formKey.currentState.validate()) {
-                setState(() {
-                  this.isFormLoading = true;
-                });
-                this.formKey.currentState.save();
+          child: Material(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(6.0),
+            child: InkWell(
+              onTap: this.isFormLoading ? null : () async{
+                if(formKey.currentState.validate()) {
+                  formKey.currentState.save();
+                  // setState(() {
+                  //   this.isFormLoading = true;
+                  // });
 
-                // try {
-                //   await Get.find<AuthController>() //암호화된 패스워드 넘겨줌
-                // }
-              }
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: Colors.grey
-              ),
-                child: InkWell(
-                  onTap: this.isFormLoading ? null : () async {
-                },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Center(
-                      child: Text('로그인',style: TextStyle(color: Colors.white),),
-                    ),
+                  /// 세이브 하기전에 비밀번호 암호화하기
+                  try {
+                   // Get.lazyPut(()=>AuthController());
+                    //암호화된 패스워드 넘겨줌
+
+                    await Get.find<AuthController>()
+                        .loginUser(email: formModel.email, password: formModel.password);
+
+                    setState(() {
+                      this.isFormLoading = false;
+                    });
+
+                    //Get.toNamed('/main');
+                  } on DioError catch (e) {
+                    Get.snackbar('로그인 실패', e.response.data['resultMsg']);
+                    setState(() {
+                      this.isFormLoading = false;
+                    });
+                  }
+                }
+              },
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Text( '로그인', style: TextStyle(color: Colors.white), ),
                   ),
+                ),
               ),
             ),
           ),
@@ -94,19 +107,20 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return DefaultLayout(
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          renderLogo(),
-          Container(height: 50.0),
-          renderAuthField(),
-          Container(height: 100.0),
-          renderLoginButton(),
-        ],
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            renderLogo(),
+            Container(height: 50.0),
+            renderAuthField(),
+            Container(height: 100.0),
+            renderLoginButton(),
+          ],
+        ),
       ),
     );
   }
