@@ -5,9 +5,9 @@ import 'package:youflix/utils/storage_utils.dart';
 
 
 abstract class BaseController extends GetxController {
-  final RootService rootService;
+  final RootService services;
   final StorageUtils storageUtils = StorageUtils();
 
-  BaseController(this.rootService);
+  BaseController(this.services);
 
 }
