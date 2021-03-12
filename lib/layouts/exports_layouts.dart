@@ -1,0 +1,1 @@
+export 'package:youflix/layouts/DefaultLayout.dart';
