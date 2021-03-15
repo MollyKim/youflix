@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:youflix/components/text_field/password_text_field.dart';
-import 'package:youflix/controllers/AuthController.dart';
+import 'package:youflix/controllers/RegisterController.dart';
 import 'package:youflix/models/internal_models/login_form_model.dart';
 import 'package:youflix/components/exports_text_field.dart';
 import 'package:youflix/layouts/exports_layouts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-
 /*
- * 작성일 : 2021-03-09
+ * 작성일 : 2021-03-15
  * 작성자 : 김명희
- * 화면명 : HL_0001
- * 주요기능 : 로그인 화면
+ * 화면명 : HR_0001
+ * 주요기능 : 회원가입
  */
 
-class AuthScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _AuthScreenState createState() => _AuthScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
+
   final formModel = LoginFormModel();
   bool isFormLoading = false;
   //GlobalKey<ScaffoldState> formKey = new GlobalKey();
@@ -29,9 +28,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   renderLogo() {
     return Center(
-      child: SvgPicture.asset(
-        'assets/netflix_app_icon.svg',
-      ),
+      child: Text("회원가입",style: TextStyle(color: Colors.white, fontSize: 30),)
     );
   }
 
@@ -70,7 +67,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   try {
                     //암호화된 패스워드 넘겨줌
 
-                    await Get.find<AuthController>()
+                    await Get.find<RegisterController>()
                         .loginUser(email: formModel.email, password: formModel.password);
 
                     setState(() {
@@ -79,7 +76,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
                     //Get.toNamed('/main');
                   } on DioError catch (e) {
-                    Get.snackbar('로그인 실패', e.response.data['resultMsg']);
+                    Get.snackbar('회원가입 실패', e.response.data['resultMsg']);
                     setState(() {
                       this.isFormLoading = false;
                     });
@@ -90,7 +87,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: Center(
-                    child: Text( '로그인', style: TextStyle(color: Colors.white), ),
+                    child: Text( '회원가입', style: TextStyle(color: Colors.white), ),
                   ),
                 ),
               ),
@@ -116,19 +113,6 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  renderBottom() {
-    return Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            renderRegisterButton('아이디 찾기', () => Get.toNamed('/auth/register')),
-            renderRegisterButton('비밀번호 찾기', () => Get.toNamed('/auth/register')),
-            renderRegisterButton('회원가입', () => Get.toNamed('/auth/register')),
-          ],
-        ),
-    );
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -140,15 +124,15 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           children: [
             renderLogo(),
-            Container(height: 50.0),
+            Container(height: 150.0),
             renderAuthField(),
             Container(height: 50.0),
             renderLoginButton(),
-            renderBottom(),
           ],
         ),
       ),
     );
   }
 }
+
 

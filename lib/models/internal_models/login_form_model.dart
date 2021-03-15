@@ -1,3 +1,5 @@
+import 'package:encrypt/encrypt.dart';
+
 /*
  * 작성일 : 2021-03-09
  * 작성자 : 김명희
@@ -6,19 +8,20 @@
  * 클래스 : LoginFormModel
  * 설명 : 단순 로그인에 사용될 모델
  */
+
 class LoginFormModel{
   String _email;
-  String _password;
+  Key _password;
 
   setEmail(String email){
     _email = email;
   }
 
   setPassword(String password){
-    _password = password;
+    _password = Key.fromUtf8(password);
   }
 
   get email => _email;
 
-  get password => _password;
+  get password => Encrypter(AES(_password));
 }
