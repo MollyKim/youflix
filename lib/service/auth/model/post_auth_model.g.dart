@@ -27,13 +27,13 @@ Map<String, dynamic> _$PostTokenResponseToJson(PostTokenResponse instance) =>
 
 PostOAuthTokenBody _$PostOAuthTokenBodyFromJson(Map<String, dynamic> json) {
   return PostOAuthTokenBody(
-    username: json['username'] as String,
-    password: json['password'] as String,
+    CUST_EMAIL: json['CUST_EMAIL'] as String,
+    PASSWORD: json['PASSWORD'] as String,
   );
 }
 
 Map<String, dynamic> _$PostOAuthTokenBodyToJson(PostOAuthTokenBody instance) =>
     <String, dynamic>{
-      'username': instance.username,
-      'password': instance.password,
+      'CUST_EMAIL': instance.CUST_EMAIL,
+      'PASSWORD': instance.PASSWORD,
     };

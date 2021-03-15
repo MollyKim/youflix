@@ -51,10 +51,7 @@ class RootService {
 
       final token = await storageUtils.readByKey(key: 'accessToken');
 
-      options.headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
-    } // 뒤에 뭐 엄청 맣은데 뭔지모르겠음
+    }
 
     options.data = options.data.toJson();
 
@@ -62,7 +59,6 @@ class RootService {
       print('------REQUEST SENT WITH FOLLOWING LOG------');
       print('path: ${options.baseUrl}${options.path}');
       print('body: ${options.data}');
-      print('headers: ${options.headers}');
       print('------REQUEST SENT INFO END------');
       print('');
     }

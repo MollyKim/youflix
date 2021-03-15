@@ -33,12 +33,12 @@ class PostTokenResponse {
 
 @JsonSerializable(nullable: false)
 class PostOAuthTokenBody {
-  final String username;
-  final String password;
+  final String CUST_EMAIL;
+  final String PASSWORD;
 
   PostOAuthTokenBody({
-    @required this.username,
-    @required this.password,
+    @required this.CUST_EMAIL,
+    @required this.PASSWORD,
   });
 
   factory PostOAuthTokenBody.fromJson(Map<String, dynamic> json) =>
