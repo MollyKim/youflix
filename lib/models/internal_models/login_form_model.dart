@@ -1,4 +1,5 @@
-import 'package:encrypt/encrypt.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 /*
  * 작성일 : 2021-03-09
@@ -11,17 +12,18 @@ import 'package:encrypt/encrypt.dart';
 
 class LoginFormModel{
   String _email;
-  Key _password;
+  var pw;
 
   setEmail(String email){
     _email = email;
   }
 
   setPassword(String password){
-    _password = Key.fromUtf8(password);
+    var bytes = utf8.encode(password);
+    pw = sha256.convert(bytes);
   }
 
   get email => _email;
 
-  get password => Encrypter(AES(_password));
+  get password => pw.toString();
 }

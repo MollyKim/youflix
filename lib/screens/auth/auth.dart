@@ -30,7 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
   renderLogo() {
     return Center(
       child: SvgPicture.asset(
-        'assets/netflix_app_icon.svg',
+        'assets/netflix_app_icon.svg',height: 50,
       ),
     );
   }
