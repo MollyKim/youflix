@@ -16,7 +16,7 @@ class RegisterController extends BaseController{
   }) async {
     assert(email != null);
     assert(password != null);
-    final resp = await super.services.authService.postToken(
+    final resp = await super.services.registerService.postToken(
       PostOAuthTokenBody: PostOAuthTokenBody(
         CUST_EMAIL: email,
         PASSWORD: password,

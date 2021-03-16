@@ -23,13 +23,13 @@ class _AuthService implements AuthService {
     queryParameters.removeWhere((key, value) => value == null);
     final _data = PostOAuthTokenBody;
     final _result = await _dio.request<Map<String, dynamic>>('',
-      queryParameters: queryParameters,
-      options: RequestOptions(
-        method: 'POST',
-        extra: _extra,
-        baseUrl: baseUrl
-      ),
-      data: _data
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            extra: _extra,
+            baseUrl: baseUrl
+        ),
+        data: _data
     );
     return PostTokenResponse.fromJson(_result.data);
   }

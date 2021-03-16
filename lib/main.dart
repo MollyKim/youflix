@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youflix/controllers/RegisterController.dart';
 import 'package:youflix/screens/auth/auth.dart';
 import 'package:youflix/service/root_service.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,11 @@ class _MyAppState extends State<MyApp> {
 
     Get.put(
       AuthController(
+        rootService: services,
+      ),
+    );
+    Get.put(
+      RegisterController(
         rootService: services,
       ),
     );

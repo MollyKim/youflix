@@ -62,10 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   // setState(() {
                   //   this.isFormLoading = true;
                   // });
-
-                  /// 세이브 하기전에 비밀번호 암호화하기
                   try {
-                    //암호화된 패스워드 넘겨줌
 
                     await Get.find<RegisterController>()
                         .loginUser(email: formModel.email, password: formModel.password);

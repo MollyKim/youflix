@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:youflix/service/auth/auth_service.dart';
+import 'package:youflix/service/auth/register_service.dart';
 import 'package:youflix/utils/storage_utils.dart';
 import 'package:youflix/consts/network.dart';
 
@@ -14,9 +15,11 @@ class RootService {
       );
 
   AuthService authService;
+  RegisterService registerService;
 
   RootService()
-    : this.authService = AuthService(_dio);
+    : this.authService = AuthService(_dio),
+      this.registerService = RegisterService(_dio);
 
 
   static onErrorWrapper(DioError error) async {
