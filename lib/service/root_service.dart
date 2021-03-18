@@ -3,6 +3,7 @@ import 'package:youflix/service/auth/auth_service.dart';
 import 'package:youflix/service/auth/register_service.dart';
 import 'package:youflix/utils/storage_utils.dart';
 import 'package:youflix/consts/network.dart';
+import 'package:youflix/service/common/general_response_model.dart';
 
 class RootService {
   static Dio _dio = Dio()
@@ -20,6 +21,28 @@ class RootService {
   RootService()
     : this.authService = AuthService(_dio),
       this.registerService = RegisterService(_dio);
+
+
+  static parseBody(dynamic data) {
+    if(data is ListResponseModel)
+      return data.toString();
+    else {
+      if (data is List) {
+        for (int i = 0; i < data.length; i++) {
+          data[i] = parseBody(data[i]);
+        }
+      }
+
+      if (data is Map) {
+        // for (var key in data.keys) {
+        //RelationController.relationApprove 호출할때 아래 항목 때문에 NoSuchMethodError 발생해서 주석처리함
+        //data[key] = parseBody(data[key]);
+        // }
+      }
+
+      return data.toString();
+    }
+  }
 
 
   static onErrorWrapper(DioError error) async {
@@ -61,7 +84,8 @@ class RootService {
     if (LOG_HTTP_REQUESTS) {
       print('------REQUEST SENT WITH FOLLOWING LOG------');
       print('path: ${options.baseUrl}${options.path}');
-      print('body: ${options.data}');
+      print('body: ${parseBody(options.data)}');
+      print('headers: ${options.headers}');
       print('------REQUEST SENT INFO END------');
       print('');
     }

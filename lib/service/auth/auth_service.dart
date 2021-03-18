@@ -11,10 +11,10 @@ abstract class AuthService {
   factory AuthService(Dio dio, {String baseUrl}) = _AuthService;
 
   @POST('/log_in')
-
-  Future<PostTokenResponse> postToken({
+  Future<PostSessionResponse> postToken({
     @required @Body() PostOAuthTokenBody,
   });
+}
 
   // Future<List<UserModel>> authSession() async {
   //   Response response;
@@ -37,4 +37,3 @@ abstract class AuthService {
   //     throw Exception("fail");
   //   }
   // }
-}

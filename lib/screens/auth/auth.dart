@@ -23,7 +23,6 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final formModel = LoginFormModel();
-  bool isFormLoading = false;
   //GlobalKey<ScaffoldState> formKey = new GlobalKey();
   final formKey = GlobalKey<FormState>();
 
@@ -59,31 +58,24 @@ class _AuthScreenState extends State<AuthScreen> {
             color: Colors.grey,
             borderRadius: BorderRadius.circular(6.0),
             child: InkWell(
-              onTap: this.isFormLoading ? null : () async{
+              onTap: () async{
                 if(formKey.currentState.validate()) {
                   formKey.currentState.save();
-                  // setState(() {
-                  //   this.isFormLoading = true;
-                  // });
 
-                  /// 세이브 하기전에 비밀번호 암호화하기
                   try {
-                    //암호화된 패스워드 넘겨줌
 
                     await Get.find<AuthController>()
                         .loginUser(email: formModel.email, password: formModel.password);
 
-                    setState(() {
-                      this.isFormLoading = false;
-                    });
 
                     //Get.toNamed('/main');
                   } on DioError catch (e) {
-                    Get.snackbar('로그인 실패', e.response.data['resultMsg']);
-                    setState(() {
-                      this.isFormLoading = false;
-                    });
-                  }
+                            Get.snackbar(
+                                '로그인 실패',
+                                e.response.data['resultMsg'],
+                                backgroundColor: Colors.white
+                            );
+                        }
                 }
               },
               child: Container(

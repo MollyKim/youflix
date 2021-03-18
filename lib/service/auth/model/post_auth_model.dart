@@ -4,31 +4,17 @@ import 'package:json_annotation/json_annotation.dart';
 part 'post_auth_model.g.dart';
 
 @JsonSerializable(nullable: false)
-class PostTokenResponse {
-  @JsonKey(name: 'access_tocken')
-  final String accessTocken;
+class PostSessionResponse{
+  @JsonKey(name:'session_id')
+  final String sessionId;
 
-  @JsonKey(name: 'token_type')
-  final String tokenType;
+  PostSessionResponse(this.sessionId);
 
-  @JsonKey(name: 'refresh_token')
-  final String refreshToken;
+  factory PostSessionResponse.fromJson(Map<String, dynamic> json) =>
+      _$PostSessionResponseFromJson(json);
 
-  @JsonKey(name: 'expires_in')
-  final String expiresIn;
-  final String scope;
+  Map<String, dynamic> toJson() => _$PostSessionResponseToJson(this);
 
-  PostTokenResponse({
-    this.accessTocken,
-    this.tokenType,
-    this.refreshToken,
-    this.expiresIn, this.scope
-  });
-
-  factory PostTokenResponse.fromJson(Map<String, dynamic> json) =>
-      _$PostTokenResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PostTokenResponseToJson(this);
 }
 
 @JsonSerializable(nullable: false)

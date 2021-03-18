@@ -16,16 +16,15 @@ class AuthController extends BaseController {
 }) async {
     assert(email != null);
     assert(password != null);
+    print("2");
     final resp = await super.services.authService.postToken(
         PostOAuthTokenBody: PostOAuthTokenBody(
           CUST_EMAIL: email,
           PASSWORD: password,
         ),
     );
-    
-    this.storageUtils.writeByKey(key: 'accessToken', value: resp.accessTocken);
-    //나중에 추가
-    //this.storageUtils.writeByKey(key: 'refreshToken', value: resp.refreshToken);
+    print("@@@");
+    this.storageUtils.writeByKey(key: 'session_id', value: resp.sessionId);
     return resp;
   }
 }

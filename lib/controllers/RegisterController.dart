@@ -23,7 +23,7 @@ class RegisterController extends BaseController{
       ),
     );
 
-    this.storageUtils.writeByKey(key: 'accessToken', value: resp.accessTocken);
+    //this.storageUtils.writeByKey(key: 'accessToken', value: resp.accessTocken);
     //나중에 추가
     //this.storageUtils.writeByKey(key: 'refreshToken', value: resp.refreshToken);
     return resp;

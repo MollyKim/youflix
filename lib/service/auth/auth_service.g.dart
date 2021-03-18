@@ -16,22 +16,23 @@ class _AuthService implements AuthService {
   String baseUrl;
 
   @override
-  Future<PostTokenResponse> postToken({PostOAuthTokenBody}) async {
+  Future<PostSessionResponse> postToken({PostOAuthTokenBody}) async {
     ArgumentError.checkNotNull(PostOAuthTokenBody,'PostOAuthTokenBody');
-    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((key, value) => value == null);
+    print("3");
     final _data = PostOAuthTokenBody;
+
     final _result = await _dio.request<Map<String, dynamic>>('',
-        queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
-            extra: _extra,
             baseUrl: baseUrl
         ),
         data: _data
     );
-    return PostTokenResponse.fromJson(_result.data);
+    print("###");
+    print(_result.data);
+    return PostOAuthTokenBody.fromJson(PostOAuthTokenBody);
   }
 
 }
