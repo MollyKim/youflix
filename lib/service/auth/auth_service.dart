@@ -12,7 +12,7 @@ abstract class AuthService {
 
   @POST('/log_in')
   Future<PostSessionResponse> postToken({
-    @required @Body() PostOAuthTokenBody,
+    @required @Body() PostOAuthTokenBody body,
   });
 }
 

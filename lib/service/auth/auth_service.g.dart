@@ -16,7 +16,7 @@ class _AuthService implements AuthService {
   String baseUrl;
 
   @override
-  Future<PostSessionResponse> postToken({PostOAuthTokenBody}) async {
+  Future<PostSessionResponse> postToken({body}) async {
     ArgumentError.checkNotNull(PostOAuthTokenBody,'PostOAuthTokenBody');
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((key, value) => value == null);
@@ -32,7 +32,7 @@ class _AuthService implements AuthService {
     );
     print("###");
     print(_result.data);
-    return PostOAuthTokenBody.fromJson(PostOAuthTokenBody);
+    return PostSessionResponse.fromJson(_result.data);
   }
 
 }

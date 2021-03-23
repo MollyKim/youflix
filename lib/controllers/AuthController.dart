@@ -18,7 +18,7 @@ class AuthController extends BaseController {
     assert(password != null);
     print("2");
     final resp = await super.services.authService.postToken(
-        PostOAuthTokenBody: PostOAuthTokenBody(
+        body: PostOAuthTokenBody(
           CUST_EMAIL: email,
           PASSWORD: password,
         ),
