@@ -10,7 +10,7 @@ part 'auth_service.g.dart';
 abstract class AuthService {
   factory AuthService(Dio dio, {String baseUrl}) = _AuthService;
   @POST('/log_in')
-  Future<PostSessionResponse> postToken({
+  Future<String> postToken({
     @required @Body() PostOAuthTokenBody body,
   });
 }

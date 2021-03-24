@@ -16,7 +16,7 @@ class _AuthService implements AuthService {
   String baseUrl;
 
   @override
-  Future<PostSessionResponse> postToken({body}) async {
+  Future<String> postToken({body}) async {
     ArgumentError.checkNotNull(body,'body');
     final _data = <String, dynamic>{};
     _data.addAll(body?.toJson() ?? <String, dynamic>{});
@@ -25,7 +25,7 @@ class _AuthService implements AuthService {
 
     print(_data);
 
-    final _result = await _dio.request<Map<String, dynamic>>('',
+    final _result = await _dio.request<String>('',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -35,7 +35,7 @@ class _AuthService implements AuthService {
     );
     print("###");
     print(_result.data);
-    return PostSessionResponse.fromJson(_result.data);
+    return _result.data;
   }
 
 }

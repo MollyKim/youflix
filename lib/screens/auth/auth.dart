@@ -74,8 +74,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     print("===============");
                     print(e.response);
                             Get.snackbar(
-                                '로그인 실패',
-                                e.response.data['resultMsg'],
+                                '로그인 실패','dd',
+                                //e.response.data['resultMsg'],
                                 backgroundColor: Colors.white
                             );
                         }
