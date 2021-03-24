@@ -22,7 +22,26 @@ class RootService {
     : this.authService = AuthService(_dio),
       this.registerService = RegisterService(_dio);
 
+  static parseBody(dynamic data) {
+    if(data is ListResponseModel)
+      return data.toString();
+    else {
+      if (data is List) {
+        for (int i = 0; i < data.length; i++) {
+          data[i] = parseBody(data[i]);
+        }
+      }
 
+      if (data is Map) {
+        // for (var key in data.keys) {
+        //RelationController.relationApprove 호출할때 아래 항목 때문에 NoSuchMethodError 발생해서 주석처리함
+        //data[key] = parseBody(data[key]);
+        // }
+      }
+
+      return data.toString();
+    }
+  }
 
   static onErrorWrapper(DioError error) async {
     if (LOG_HTTP_REQUESTS) {
@@ -51,21 +70,19 @@ class RootService {
   }
 
   static onRequestWrapper(RequestOptions options) async{
-    final storageUtils = StorageUtils();
-
-    if(options.headers.containsKey('accessToken')) {
-      options.headers.remove('accessToken');
-
-      final token = await storageUtils.readByKey(key: 'accessToken');
-
-    }
-
-    options.data = options.data.toJson();
+    // final storageUtils = StorageUtils();
+    // if(options.headers.containsKey('accessToken')) {
+    //   options.headers.remove('accessToken');
+    //
+    //   //헤더에 세션아이디 넣어줄거
+    //   final token = await storageUtils.readByKey(key: 'accessToken');
+    //
+    // }
 
     if (LOG_HTTP_REQUESTS) {
       print('------REQUEST SENT WITH FOLLOWING LOG------');
       print('path: ${options.baseUrl}${options.path}');
-      print('body: ${options.data}');
+      print('body: ${parseBody(options.data)}');
       print('headers: ${options.headers}');
       print('------REQUEST SENT INFO END------');
       print('');

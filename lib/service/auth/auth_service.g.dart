@@ -17,14 +17,16 @@ class _AuthService implements AuthService {
 
   @override
   Future<PostSessionResponse> postToken({body}) async {
-    ArgumentError.checkNotNull(PostOAuthTokenBody,'PostOAuthTokenBody');
+    ArgumentError.checkNotNull(body,'body');
+    final _data = <String, dynamic>{};
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((key, value) => value == null);
-    print("3");
-    final _data = PostOAuthTokenBody;
-    print("^^");
+    queryParameters.removeWhere((k, v) => v == null);
+
+    print(_data);
 
     final _result = await _dio.request<Map<String, dynamic>>('',
+        queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
             baseUrl: baseUrl

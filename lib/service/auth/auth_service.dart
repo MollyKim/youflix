@@ -9,7 +9,6 @@ part 'auth_service.g.dart';
 @RestApi(baseUrl: 'http://$DEV_HOST/CUST/api')
 abstract class AuthService {
   factory AuthService(Dio dio, {String baseUrl}) = _AuthService;
- // print(_AuthService);
   @POST('/log_in')
   Future<PostSessionResponse> postToken({
     @required @Body() PostOAuthTokenBody body,

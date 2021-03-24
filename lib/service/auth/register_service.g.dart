@@ -18,7 +18,6 @@ class _RegisterService implements RegisterService {
   @override
   Future<PostSessionResponse> postToken({PostOAuthTokenBody}) async {
     ArgumentError.checkNotNull(PostOAuthTokenBody,'PostOAuthTokenBody');
-    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((key, value) => value == null);
     final _data = PostOAuthTokenBody;
@@ -26,7 +25,6 @@ class _RegisterService implements RegisterService {
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
-            extra: _extra,
             baseUrl: baseUrl
         ),
         data: _data
