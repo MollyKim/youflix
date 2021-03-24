@@ -69,13 +69,24 @@ class _AuthScreenState extends State<AuthScreen> {
 
 
                     //Get.toNamed('/main');
-                  } on DioError catch (e) {
-                            Get.snackbar(
-                                '로그인 실패',
-                                e.response.data['resultMsg'],
-                                backgroundColor: Colors.white
-                            );
-                        }
+                  } on DioError catch(e) {
+                    if (e.response == null) {
+                      print(e.response.data);
+                      print(e.response.headers);
+                      print(e.response.request);
+                    } else {
+                      // Something happened in setting up or sending the request that triggered an Error
+                      print(e.request);
+                      print(e.message);
+                    }
+                  }
+                  // on DioError catch (e) {
+                  //           Get.snackbar(
+                  //               '로그인 실패',
+                  //               e.response.data['resultMsg'],
+                  //               backgroundColor: Colors.white
+                  //           );
+                  //       }
                 }
               },
               child: Container(

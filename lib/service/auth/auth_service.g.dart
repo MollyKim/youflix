@@ -22,6 +22,7 @@ class _AuthService implements AuthService {
     queryParameters.removeWhere((key, value) => value == null);
     print("3");
     final _data = PostOAuthTokenBody;
+    print("^^");
 
     final _result = await _dio.request<Map<String, dynamic>>('',
         options: RequestOptions(

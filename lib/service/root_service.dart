@@ -23,33 +23,13 @@ class RootService {
       this.registerService = RegisterService(_dio);
 
 
-  static parseBody(dynamic data) {
-    if(data is ListResponseModel)
-      return data.toString();
-    else {
-      if (data is List) {
-        for (int i = 0; i < data.length; i++) {
-          data[i] = parseBody(data[i]);
-        }
-      }
-
-      if (data is Map) {
-        // for (var key in data.keys) {
-        //RelationController.relationApprove 호출할때 아래 항목 때문에 NoSuchMethodError 발생해서 주석처리함
-        //data[key] = parseBody(data[key]);
-        // }
-      }
-
-      return data.toString();
-    }
-  }
-
 
   static onErrorWrapper(DioError error) async {
     if (LOG_HTTP_REQUESTS) {
       print('------ERROR THROWN WITH FOLLOWING LOG------');
       print('path: ${error.request.baseUrl}${error.request.path}');
-      print('body: ${error.response.data.toString()}');
+      print('status code: ${error.response.statusCode}\n');
+      print('body: ${error.response.data.toString()}\n');
       print('headers: ${error.response.headers}');
       print('------ERROR THROWN INFO END------');
       print('');
@@ -64,6 +44,7 @@ class RootService {
       print('path: ${resp.request.baseUrl}${resp.request.path}');
       print('body: ${resp.data}');
       print('headers: ${resp.headers}');
+      print('statusCode: ${resp.statusCode}');
       print('------RESPONSE RECEIVED INFO END------');
       print('');
     }
@@ -84,7 +65,7 @@ class RootService {
     if (LOG_HTTP_REQUESTS) {
       print('------REQUEST SENT WITH FOLLOWING LOG------');
       print('path: ${options.baseUrl}${options.path}');
-      print('body: ${parseBody(options.data)}');
+      print('body: ${options.data}');
       print('headers: ${options.headers}');
       print('------REQUEST SENT INFO END------');
       print('');
