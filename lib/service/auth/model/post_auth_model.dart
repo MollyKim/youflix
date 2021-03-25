@@ -8,7 +8,12 @@ class PostSessionResponse{
   @JsonKey(name:'session_id')
   final String sessionId;
 
-  PostSessionResponse(this.sessionId);
+  @JsonKey(name:'code')
+  final String code;
+
+  PostSessionResponse({
+    this.sessionId, this.code,
+  });
 
   factory PostSessionResponse.fromJson(Map<String, dynamic> json) =>
       _$PostSessionResponseFromJson(json);

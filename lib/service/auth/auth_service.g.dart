@@ -16,16 +16,14 @@ class _AuthService implements AuthService {
   String baseUrl;
 
   @override
-  Future<String> postToken({body}) async {
+  Future<PostSessionResponse> postToken({body}) async {
     ArgumentError.checkNotNull(body,'body');
     final _data = <String, dynamic>{};
     _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
 
-    print(_data);
-
-    final _result = await _dio.request<String>('',
+    final _result = await _dio.request<Map<String, Map<String,dynamic>>>('',
         queryParameters: queryParameters,
         options: RequestOptions(
             method: 'POST',
@@ -35,7 +33,8 @@ class _AuthService implements AuthService {
     );
     print("###");
     print(_result.data);
-    return _result.data;
+    //return _result.data;
+    return PostSessionResponse.fromJson(_result.data);
   }
 
 }

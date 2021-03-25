@@ -23,8 +23,6 @@ class AuthController extends BaseController {
           PASSWORD: password,
         ),
     );
-    print("@@@");
-    print(resp);
     //this.storageUtils.writeByKey(key: 'session_id', value: resp.sessionId);
     return resp;
   }

@@ -6,9 +6,10 @@ part of 'post_auth_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PostSessionResponse _$PostSessionResponseFromJson(Map<String, dynamic> json) {
+PostSessionResponse _$PostSessionResponseFromJson(Map<String,dynamic> json) {
   return PostSessionResponse(
-    json['session_id'] as String,
+    sessionId : json['data']['session_id'] as String,
+    code : json['meta']['code'] as String,
   );
 }
 
@@ -16,6 +17,7 @@ Map<String, dynamic> _$PostSessionResponseToJson(
         PostSessionResponse instance) =>
     <String, dynamic>{
       'session_id': instance.sessionId,
+      'code': instance.code,
     };
 
 PostOAuthTokenBody _$PostOAuthTokenBodyFromJson(Map<String, dynamic> json) {

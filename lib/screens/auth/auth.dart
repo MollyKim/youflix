@@ -67,7 +67,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     await Get.find<AuthController>()
                         .loginUser(email: formModel.email, password: formModel.password);
 
-
                     //Get.toNamed('/main');
                   }
                   on DioError catch (e) {
