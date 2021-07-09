@@ -23,6 +23,7 @@ class _AuthService implements AuthService {
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
 
+
     final _result = await _dio.request<Map<String, Map<String,dynamic>>>('',
         queryParameters: queryParameters,
         options: RequestOptions(

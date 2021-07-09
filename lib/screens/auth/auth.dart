@@ -71,7 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   }
                   on DioError catch (e) {
                     print("===============");
-                    print(e.response);
+                    print("in auth screen : ${e.response}");
                             Get.snackbar(
                                 '로그인 실패','dd',
                                 //e.response.data['resultMsg'],

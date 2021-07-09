@@ -8,11 +8,8 @@ class PostSessionResponse{
   @JsonKey(name:'session_id')
   final String sessionId;
 
-  @JsonKey(name:'code')
-  final String code;
-
   PostSessionResponse({
-    this.sessionId, this.code,
+    this.sessionId,
   });
 
   factory PostSessionResponse.fromJson(Map<String, dynamic> json) =>
